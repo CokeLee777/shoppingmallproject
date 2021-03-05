@@ -1,6 +1,9 @@
 package coke.cokeshop.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,7 +11,7 @@ import java.util.List;
 import static javax.persistence.FetchType.*;
 
 @Entity
-@Getter
+@Getter @Setter
 public class Member {
 
     @Id @GeneratedValue
