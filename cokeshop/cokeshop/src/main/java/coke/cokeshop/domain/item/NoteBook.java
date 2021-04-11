@@ -6,8 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("N")
 @Getter
-@DiscriminatorValue(value = "G")
-public class GalaxyBook extends Item{
-
+public class NoteBook {
 }

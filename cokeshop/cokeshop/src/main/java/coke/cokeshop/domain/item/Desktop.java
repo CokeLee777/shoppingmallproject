@@ -6,8 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("D")
 @Getter
-@DiscriminatorValue(value = "M")
-public class MacBook extends Item{
-
+public class Desktop extends Item{
 }

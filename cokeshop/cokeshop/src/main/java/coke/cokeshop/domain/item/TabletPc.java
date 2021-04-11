@@ -6,8 +6,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("T")
 @Getter
-@DiscriminatorValue(value = "L")
-public class LgGram extends Item{
-
+public class TabletPc {
 }

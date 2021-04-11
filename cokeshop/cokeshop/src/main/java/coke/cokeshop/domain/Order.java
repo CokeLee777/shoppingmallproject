@@ -44,7 +44,7 @@ public class Order {
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime orderDate;
 
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
@@ -52,13 +52,36 @@ public class Order {
     /**
      * 연관관계 메서드
      */
-    private void setMember(Member member){
+    public void setMember(Member member){
         this.member = member;
         member.getOrders().add(this);
     }
 
-    private void setDelivery(Delivery delivery){
-        delivery = Delivery.createDelivery(this, delivery.getAddress(), delivery.getStatus());
+    public void setDelivery(Delivery delivery){
         this.delivery = delivery;
+        delivery.setOrder(this);
     }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    /**
+     * 주문 생성 메서드
+     */
+    public static Order createOrder(Member member, Delivery delivery, OrderItem ... orderItems){
+        Order order = new Order();
+        order.member = member;
+        order.delivery = delivery;
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.status = OrderStatus.ORDER;
+        order.orderDate = LocalDateTime.now();
+
+        return order;
+    }
+
+
 }
