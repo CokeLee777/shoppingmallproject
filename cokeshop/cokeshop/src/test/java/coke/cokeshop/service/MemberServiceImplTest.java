@@ -19,12 +19,9 @@ class MemberServiceImplTest {
     @Autowired MemberService memberService;
 
     @Test
-    public void 회원가입() throws Exception {
+    public void joinMember() throws Exception {
         //given
-        Member member = new Member();
-        member.setUsername("kim");
-        member.setPassword("123456");
-        member.setEmail("kim@naver.com");
+        Member member = Member.createMember("kim", "123", "kim@naver.com");
 
         //when
         Long id = memberService.join(member);
@@ -35,13 +32,11 @@ class MemberServiceImplTest {
     }
 
     @Test
-    public void 중복회원예외() throws Exception {
+    public void duplicateMemberException() throws Exception {
         //given
-        Member member1 = new Member();
-        member1.setUsername("kim");
+        Member member1 = Member.createMember("kim", "123", "kim@naver.com");
 
-        Member member2 = new Member();
-        member2.setUsername("kim");
+        Member member2 = Member.createMember("kim", "123", "kim@naver.com");
 
         //when
         memberService.join(member1);
@@ -52,16 +47,14 @@ class MemberServiceImplTest {
     }
 
     @Test
-    public void 비밀번호찾기() throws Exception {
+    public void findPassword() throws Exception {
         //given
-        Member member = new Member();
-        member.setUsername("kim");
-        member.setPassword("123456");
+        Member member = Member.createMember("kim", "123", "kim@naver.com");
 
         //when
         memberService.join(member);
         String findPassword = memberService.findPassword(member.getUsername());
         //then
-        assertThat(findPassword).isEqualTo("123456");
+        assertThat(findPassword).isEqualTo("123");
     }
 }

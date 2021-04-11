@@ -1,11 +1,14 @@
 package coke.cokeshop.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Delivery {
 
     @Id @GeneratedValue
@@ -20,4 +23,20 @@ public class Delivery {
 
     @Enumerated(value = EnumType.STRING)
     private DeliveryStatus status;
+
+    /**
+     * 배송 생성 메서드
+     */
+    public static Delivery createDelivery(Order order, Address address, DeliveryStatus status){
+        Delivery delivery = new Delivery();
+        delivery.order = order;
+        delivery.address = address;
+        delivery.status = status;
+
+        return delivery;
+    }
+
+    /**
+     *
+     */
 }
