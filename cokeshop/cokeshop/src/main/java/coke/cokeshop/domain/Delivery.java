@@ -7,8 +7,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * 배송 정보 엔티티
+ * address: 배송 주소
+ * status: 배송 상태
+ */
 @Entity
-@Getter @Setter
+@Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Delivery {
 
@@ -30,9 +35,9 @@ public class Delivery {
      */
     public static Delivery createDelivery(Order order, Address address, DeliveryStatus status){
         Delivery delivery = new Delivery();
-        delivery.order = order;
-        delivery.address = address;
-        delivery.status = status;
+        delivery.setOrder(order);
+        delivery.setAddress(address);
+        delivery.setStatus(status);
 
         return delivery;
     }

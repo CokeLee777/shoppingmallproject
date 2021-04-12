@@ -10,8 +10,13 @@ import javax.persistence.*;
 
 import static javax.persistence.FetchType.*;
 
+/**
+ * 주문 상품 엔티티
+ * orderPrice: 주문 상품 가격
+ * count: 주문 상품 수량
+ */
 @Entity
-@Getter @Setter
+@Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
@@ -19,10 +24,12 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
+    //주문 엔티티와 N:1 관계
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
+    //상품 엔티티와 N:1 관계
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
@@ -35,15 +42,30 @@ public class OrderItem {
      */
     public static OrderItem createOrderItem(Item item, int orderPrice, int count){
         OrderItem orderItem = new OrderItem();
-        orderItem.item = item;
-        orderItem.orderPrice = orderPrice;
-        orderItem.count = count;
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
 
         //재고 수량 없애는 메서드
-        //item.removeStock
+        item.removeStock(count);
 
         return orderItem;
     }
 
+    /**
+     * 비즈니스 로직
+     */
+
+    public void cancel(){
+        getItem().addStock(count);
+    }
+
+    /**
+     * 조회 로직
+     */
+
+    public int totalPrice(){
+        return getOrderPrice() * getCount();
+    }
 
 }

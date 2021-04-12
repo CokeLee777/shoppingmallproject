@@ -12,4 +12,5 @@ public interface MemberRepository {
     List<Member> findAll();                 //회원 모두 찾기
     List<Member> findByName(String name);   //회원 이름으로 찾기
     List<Member> findByEmail(String email); //회원 이메일로 찾기
+    void delete(Member member);                 //회원 삭제
 }

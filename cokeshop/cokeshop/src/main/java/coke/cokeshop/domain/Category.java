@@ -1,7 +1,9 @@
 package coke.cokeshop.domain;
 
 import coke.cokeshop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * name: 카테고리 이름
  */
 @Entity
-@Getter
+@Getter @Setter(AccessLevel.PROTECTED)
 public class Category {
 
     @Id @GeneratedValue

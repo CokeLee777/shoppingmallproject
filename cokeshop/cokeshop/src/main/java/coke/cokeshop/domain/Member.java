@@ -15,7 +15,7 @@ import java.util.List;
  * email: 회원 이메일
  */
 @Entity
-@Getter
+@Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
@@ -27,6 +27,9 @@ public class Member {
     private String password;
     private String email;
 
+    @Embedded
+    private Address address;
+
     //주문 엔티티와 1:N 관계
     @OneToMany(mappedBy = "member")
     private List<Order> orders;
@@ -34,12 +37,13 @@ public class Member {
     /**
      * 회원 생성 메서드
      */
-    public static Member createMember(String username, String password, String email){
+    public static Member createMember(String username, String password, String email, Address address){
 
         Member member = new Member();
-        member.username = username;
-        member.password = password;
-        member.email = email;
+        member.setUsername(username);
+        member.setPassword(password);
+        member.setEmail(email);
+        member.setAddress(address);
 
         return member;
     }

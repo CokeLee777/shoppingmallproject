@@ -3,6 +3,7 @@ package coke.cokeshop.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -22,7 +23,7 @@ import static javax.persistence.FetchType.*;
  */
 @Entity
 @Table(name = "orders")
-@Getter
+@Getter @Setter(AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
@@ -46,6 +47,7 @@ public class Order {
 
     private LocalDateTime orderDate;
 
+    //Enum 객체
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 
@@ -72,16 +74,43 @@ public class Order {
      */
     public static Order createOrder(Member member, Delivery delivery, OrderItem ... orderItems){
         Order order = new Order();
-        order.member = member;
-        order.delivery = delivery;
+        order.setMember(member);
+        order.setDelivery(delivery);
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);
         }
-        order.status = OrderStatus.ORDER;
-        order.orderDate = LocalDateTime.now();
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
 
         return order;
     }
 
+    /**
+     * 비즈니스 로직
+     */
+
+    //주문 취소
+    public void cancel(){
+        //배송 완료되었을 때 취소불가
+        if(delivery.getStatus() == DeliveryStatus.SHIPPING ||
+                delivery.getStatus() == DeliveryStatus.COMPLETE){
+            throw new IllegalStateException("상품이 배송중이거나 배송완료되면 취소가 불가능합니다.");
+        }
+
+        this.status = OrderStatus.CANCEL;
+    }
+
+    /**
+     * 조회 로직
+     */
+
+    //전체 주문 가격 조회
+    public int totalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem: orderItems){
+            totalPrice += orderItem.totalPrice();
+        }
+        return totalPrice;
+    }
 
 }

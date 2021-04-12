@@ -8,5 +8,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("N")
 @Getter
-public class NoteBook {
+public class NoteBook extends Item{
 }

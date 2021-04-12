@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hello Coke</title>
+</head>
+<body>
+<div class="container">
+    <form role="form" action="/members/new" th:object="${memberForm}" method="post">
+        <div class="username">
+            <label th:for="username">이름</label>
+            <input type="text" th:field="*{username}" class="username" placeholder="이름을 입력하세요"
+                   th:class="${#fields.hasErrors('username')}? 'username fieldError' : 'username'">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect name</p>
+        </div>
+        <div class="password">
+            <label th:for="password">비밀번호</label>
+            <input type="password" th:field="*{password}" class="password" placeholder="비밀번호를 입력하세요"
+                   th:class="${#fields.hasErrors('password')}? 'password fieldError' : 'password'">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</p>
+        </div>
+        <div class="email">
+            <label th:for="email">이메일</label>
+            <input type="text" th:field="*{email}" class="email" placeholder="이메일을 입력하세요"
+                   th:class="${#fields.hasErrors('email')}? 'email fieldError' : 'email'">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</p>
+        </div>
+        <div class="city">
+            <label th:for="city">도시</label>
+            <input type="text" th:field="*{city}" class="form-control" placeholder="도시를 입력하세요">
+        </div>
+        <div class="street">
+            <label th:for="street">거리</label>
+            <input type="text" th:field="*{street}" class="form-control" placeholder="거리를 입력하세요">
+        </div>
+        <div class="zipcode">
+            <label th:for="zipcode">우편번호</label>
+            <input type="text" th:field="*{zipcode}" class="form-control" placeholder="우편번호를 입력하세요">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

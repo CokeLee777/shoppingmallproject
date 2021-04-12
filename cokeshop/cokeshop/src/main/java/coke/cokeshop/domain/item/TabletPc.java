@@ -8,5 +8,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("T")
 @Getter
-public class TabletPc {
+public class TabletPc extends Item{
 }

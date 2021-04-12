@@ -55,4 +55,9 @@ public class MemberRepositoryImpl implements MemberRepository{
                 .getResultList();
     }
 
+    @Override
+    public void delete(Member member) {
+        em.remove(member);
+    }
+
 }

@@ -38,6 +38,11 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member findOneById(Long id) {
+        Member findMember = memberRepository.findOneById(id);
+        //찾는 아이디가 없다면
+        if(findMember == null){
+            throw new IllegalStateException("아이디가 존재하지 않습니다.");
+        }
         return memberRepository.findOneById(id);
     }
 
@@ -49,6 +54,12 @@ public class MemberServiceImpl implements MemberService{
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void secessionMember(Long id) {
+        Member member = memberRepository.findOneById(id);
+        memberRepository.delete(member);
     }
 
 }
