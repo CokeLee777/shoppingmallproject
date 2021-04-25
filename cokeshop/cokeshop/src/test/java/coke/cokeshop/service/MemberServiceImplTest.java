@@ -28,7 +28,7 @@ class MemberServiceImplTest {
 
         //when
         Long id = memberService.join(member);
-        Member findMember = memberRepository.findOneById(id);
+        Member findMember = memberRepository.findById(id);
 
         //then
         assertThat(member).isEqualTo(findMember);
@@ -60,7 +60,7 @@ class MemberServiceImplTest {
 
         //when
         memberService.join(member);
-        String findPassword = memberService.findPassword(member.getUsername());
+        String findPassword = memberService.findPassword(member.getUsername(), member.getEmail());
         //then
         assertThat(findPassword).isEqualTo("123");
     }
@@ -76,6 +76,6 @@ class MemberServiceImplTest {
         memberService.secessionMember(joinId);
         //then
         Assertions.assertThrows(IllegalStateException.class,
-                () -> memberService.findOneById(joinId));
+                () -> memberService.findOne(joinId));
     }
 }

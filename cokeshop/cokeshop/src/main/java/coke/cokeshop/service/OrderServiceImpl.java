@@ -1,5 +1,6 @@
 package coke.cokeshop.service;
 
+import coke.cokeshop.domain.Member;
 import coke.cokeshop.domain.Order;
 import coke.cokeshop.repository.MemberRepository;
 import coke.cokeshop.repository.OrderRepository;
@@ -19,6 +20,9 @@ public class OrderServiceImpl implements OrderService{
     @Override
     @Transactional
     public Long Order(Long memberId, Long ItemId, int count) {
+        Member member = memberRepository.findById(memberId);
+
+
         return null;
     }
 

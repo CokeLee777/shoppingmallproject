@@ -1,5 +1,6 @@
 package coke.cokeshop.service;
 
+import coke.cokeshop.domain.Address;
 import coke.cokeshop.domain.Member;
 import coke.cokeshop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,8 @@ public class MemberServiceImpl implements MemberService{
     }
     //중복회원 검증 로직
     private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByName(member.getUsername());
-        if(!findMembers.isEmpty()){
+        Member findMember = memberRepository.findByName(member.getUsername());
+        if(findMember != null){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
@@ -37,28 +38,50 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member findOneById(Long id) {
-        Member findMember = memberRepository.findOneById(id);
+    public Member findOne(Long id) {
+        Member findMember = memberRepository.findById(id);
         //찾는 아이디가 없다면
         if(findMember == null){
             throw new IllegalStateException("아이디가 존재하지 않습니다.");
         }
-        return memberRepository.findOneById(id);
+        return memberRepository.findById(id);
     }
 
     @Override
-    public String findPassword(String name) {
-        Member findMember = memberRepository.findOneByName(name);
-        if(findMember != null){
-            return findMember.getPassword();
+    public Member findOne(String name) {
+        Member findMember = memberRepository.findByName(name);
+        //찾는 아이디가 없다면
+        if(findMember == null){
+            throw new IllegalStateException("아이디가 존재하지 않습니다.");
+        }
+        return memberRepository.findByName(name);
+    }
+
+    @Override
+    public String findPassword(String name, String email) {
+        Member findMember1 = memberRepository.findByName(name);
+        Member findMember2 = memberRepository.findByEmail(email);
+        if(!findMember1.equals(findMember2)){
+            throw new IllegalStateException("이름과 이메일에 따른 아이디가 존재하지 않습니다.");
+        }
+
+        if(findMember1 != null){
+            return findMember1.getPassword();
         } else {
             return null;
         }
     }
 
     @Override
+    @Transactional
+    public void update(Long id, String name, String email, String password, Address address) {
+        Member findMember = memberRepository.findById(id);
+        Member.updateMember(findMember, name, password, email, address);
+    }
+
+    @Override
     public void secessionMember(Long id) {
-        Member member = memberRepository.findOneById(id);
+        Member member = memberRepository.findById(id);
         memberRepository.delete(member);
     }
 

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <form role="form" action="/members/new" th:object="${memberForm}" method="post">
+    <form role="form" action="/member/new" th:object="${memberFormDto}" method="post">
         <div class="username">
             <label th:for="username">이름</label>
             <input type="text" th:field="*{username}" class="username" placeholder="이름을 입력하세요"

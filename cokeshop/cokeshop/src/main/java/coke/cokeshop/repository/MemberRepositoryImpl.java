@@ -20,16 +20,17 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public Member findOneById(Long id) {
+    public Member findById(Long id) {
         return em.find(Member.class, id);
     }
 
     @Override
-    public Member findOneByName(String name) {
-        TypedQuery<Member> query = em.createQuery("select m from Member m where m.username = :name", Member.class)
-                .setParameter("name", name);
-        if(query != null){
-            return query.getSingleResult();
+    public Member findByName(String name) {
+        List<Member> members = em.createQuery("select m from Member m where m.username = :name", Member.class)
+                .setParameter("name", name)
+                .getResultList();
+        if(!members.isEmpty()){
+            return members.get(0);
         } else {
             return null;
         }
@@ -42,17 +43,15 @@ public class MemberRepositoryImpl implements MemberRepository{
     }
 
     @Override
-    public List<Member> findByName(String name) {
-        return em.createQuery("select m from Member m where m.username = :name", Member.class)
-                .setParameter("name", name)
-                .getResultList();
-    }
-
-    @Override
-    public List<Member> findByEmail(String email) {
-        return em.createQuery("select m from Member m where m.email = :email", Member.class)
+    public Member findByEmail(String email) {
+        List<Member> members = em.createQuery("select m from Member m where m.email = :email", Member.class)
                 .setParameter("email", email)
                 .getResultList();
+        if(!members.isEmpty()){
+            return members.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
