@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hello Coke</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>도시</th>
+                <th>주소</th>
+                <th>우편번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member: ${members}">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.username}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.address?.city}"></td>
+                <td th:text="${member.address?.street}"></td>
+                <td th:text="${member.address?.zipcode}"></td>
+                <td>
+                    <a href="#" th:href="@{/members/{id}/edit (id=${member.id})}" role="button">수정</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/members/{id}/delete (id=${member.id})}" role="button">삭제</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

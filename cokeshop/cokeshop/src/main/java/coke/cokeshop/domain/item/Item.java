@@ -1,7 +1,9 @@
 package coke.cokeshop.domain.item;
 
 import coke.cokeshop.domain.Category;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -16,7 +18,7 @@ import static javax.persistence.FetchType.*;
  * releaseDate: 출시일
  */
 @Entity
-@Getter
+@Getter @Setter(value = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 public abstract class Item {
@@ -29,7 +31,7 @@ public abstract class Item {
     private int price;
     private int stockQuantity;
     private String madeCompany;
-    private int releaseDate;
+    private String releaseDate;
 
     //카테고리 엔티티와 N:1 관계
     @ManyToOne(fetch = LAZY)
@@ -55,5 +57,15 @@ public abstract class Item {
 
         this.stockQuantity = restQuantity;
     }
+
+    /**
+     * 생성 메서드
+     */
+
+    //상품 생성 메서드
+    public abstract Item createItem(String name, int price, int stockQuantity, String madeCompany, String releaseDate, Category category);
+
+    //상품 수정 메서드
+    public abstract void updateItem(Item item, String name, int price, int stockQuantity, String madeCompany, String releaseDate, Category category);
 
 }

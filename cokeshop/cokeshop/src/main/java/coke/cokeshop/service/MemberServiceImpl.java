@@ -74,9 +74,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     @Transactional
-    public void update(Long id, String name, String email, String password, Address address) {
+    public void update(Long id, String name, String email, Address address) {
         Member findMember = memberRepository.findById(id);
-        Member.updateMember(findMember, name, password, email, address);
+        Member.updateMember(findMember, name, email, address);
     }
 
     @Override

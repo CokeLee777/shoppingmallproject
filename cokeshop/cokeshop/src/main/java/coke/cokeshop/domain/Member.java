@@ -51,9 +51,8 @@ public class Member {
     /**
      * 회원 수정 메서드
      */
-    public static void updateMember(Member member, String name, String password, String email, Address address){
+    public static void updateMember(Member member, String name, String email, Address address){
         member.setUsername(name);
-        member.setPassword(password);
         member.setEmail(email);
         member.setAddress(address);
     }
