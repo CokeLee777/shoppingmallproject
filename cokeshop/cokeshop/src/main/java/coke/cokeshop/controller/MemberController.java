@@ -73,6 +73,7 @@ public class MemberController {
 
         model.addAttribute("members", memberListDtos);
 
+        log.info("회원조회 form access");
         return "member/memberList";
     }
 
@@ -91,6 +92,9 @@ public class MemberController {
                 member.getAddress().getZipcode());
 
         model.addAttribute("memberUpdateDto", memberUpdateDto);
+
+        log.info("회원수정 form access");
+
         return "member/updateMemberForm";
     }
 
@@ -107,16 +111,22 @@ public class MemberController {
                 memberUpdateDto.getUsername(),
                 memberUpdateDto.getEmail(),
                 address);
+
+        log.info("회원수정: id={}", memberUpdateDto.getId());
+
         return "redirect:/members";
     }
 
     /**
      * 회원 삭제
-     * 수정중
      */
     @GetMapping("/members/{id}/delete")
     public String delete(@PathVariable("id") Long id){
-        memberService.secessionMember(id);
+        Member member = memberService.findOne(id);
+        memberService.secessionMember(member);
+
+        log.info("회원삭제: id={}", id);
+
         return "redirect:/members";
     }
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,4 +26,16 @@ public class Category {
     //상품 엔티티와 1:N 관계
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Item> items;
+
+
+    public static List<Category> createCategory(String ... names){
+        List<Category> categories = new ArrayList<>();
+        for (String name : names) {
+            Category category = new Category();
+            category.setName(name);
+            categories.add(category);
+        }
+
+        return categories;
+    }
 }

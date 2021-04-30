@@ -80,8 +80,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void secessionMember(Long id) {
-        Member member = memberRepository.findById(id);
+    @Transactional
+    public void secessionMember(Member member) {
         memberRepository.delete(member);
     }
 

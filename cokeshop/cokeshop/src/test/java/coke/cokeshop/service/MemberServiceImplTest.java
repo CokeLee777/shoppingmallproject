@@ -73,7 +73,8 @@ class MemberServiceImplTest {
         Member member = Member.createMember("kim", "123", "kim@naver.com", address);
         Long joinId = memberService.join(member);
         //when
-        memberService.secessionMember(joinId);
+        Member findMember = memberService.findOne(joinId);
+        memberService.secessionMember(findMember);
         //then
         Assertions.assertThrows(IllegalStateException.class,
                 () -> memberService.findOne(joinId));
