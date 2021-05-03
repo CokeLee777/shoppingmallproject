@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.*;
@@ -38,7 +39,7 @@ public class Order {
 
     //주문 상품 엔티티와 1:N 관계
     @OneToMany(mappedBy = "order", cascade = ALL)
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     //배송 정보 엔티티와 1:1 관계
     @OneToOne(fetch = LAZY, cascade = ALL)
