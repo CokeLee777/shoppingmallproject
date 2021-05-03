@@ -1,6 +1,5 @@
 package coke.cokeshop.domain;
 
-import coke.cokeshop.domain.item.Item;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

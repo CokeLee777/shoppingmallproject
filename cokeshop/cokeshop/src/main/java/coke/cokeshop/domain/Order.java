@@ -97,7 +97,10 @@ public class Order {
             throw new IllegalStateException("상품이 배송중이거나 배송완료되면 취소가 불가능합니다.");
         }
 
-        this.status = OrderStatus.CANCEL;
+        this.setStatus(OrderStatus.CANCEL);
+        for(OrderItem orderItem: orderItems){
+            orderItem.cancel();
+        }
     }
 
     /**
@@ -105,7 +108,7 @@ public class Order {
      */
 
     //전체 주문 가격 조회
-    public int totalPrice(){
+    public int getTotalPrice(){
         int totalPrice = 0;
         for(OrderItem orderItem: orderItems){
             totalPrice += orderItem.totalPrice();

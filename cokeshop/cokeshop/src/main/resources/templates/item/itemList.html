@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hello Coke</title>
+</head>
+<body>
+<div class="lefttop">
+    <h1>
+        <a href="/">Coke Shop</a>
+    </h1>
+</div>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th>만든회사</th>
+                <th>출시일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item: ${items}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.stockQuantity}"></td>
+                <td th:text="${item.madeCompany}"></td>
+                <td th:text="${item.releaseDate}"></td>
+                <td>
+                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}" role="button">수정</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{/items/{id}/delete (id=${item.id})}" role="button">삭제</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

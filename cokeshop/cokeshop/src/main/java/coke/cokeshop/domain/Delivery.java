@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Getter @Setter(AccessLevel.PROTECTED)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Delivery {
 
     @Id @GeneratedValue
@@ -33,9 +33,8 @@ public class Delivery {
     /**
      * 배송 생성 메서드
      */
-    public static Delivery createDelivery(Order order, Address address, DeliveryStatus status){
+    public static Delivery createDelivery(Address address, DeliveryStatus status){
         Delivery delivery = new Delivery();
-        delivery.setOrder(order);
         delivery.setAddress(address);
         delivery.setStatus(status);
 

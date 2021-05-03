@@ -1,8 +1,8 @@
-package coke.cokeshop.domain.item;
+package coke.cokeshop.domain;
 
-import coke.cokeshop.domain.Category;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -19,9 +19,10 @@ import static javax.persistence.FetchType.*;
  */
 @Entity
 @Getter @Setter(value = AccessLevel.PROTECTED)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
-public abstract class Item {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "dtype")
+public class Item {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
@@ -63,9 +64,24 @@ public abstract class Item {
      */
 
     //상품 생성 메서드
-    public abstract Item createItem(String name, int price, int stockQuantity, String madeCompany, String releaseDate, Category category);
+    public static Item createItem(String name, int price, int stockQuantity, String madeCompany, String releaseDate){
+        Item item = new Item();
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+        item.setMadeCompany(madeCompany);
+        item.setReleaseDate(releaseDate);
+
+        return item;
+    }
 
     //상품 수정 메서드
-    public abstract void updateItem(Item item, String name, int price, int stockQuantity, String madeCompany, String releaseDate, Category category);
+    public void updateItem(Item item, String name, int price, int stockQuantity, String madeCompany, String releaseDate){
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+        item.setMadeCompany(madeCompany);
+        item.setReleaseDate(releaseDate);
+    }
 
 }

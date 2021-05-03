@@ -1,8 +1,9 @@
 package coke.cokeshop.service;
 
 import coke.cokeshop.domain.Category;
-import coke.cokeshop.domain.item.Item;
+import coke.cokeshop.domain.Item;
 import coke.cokeshop.repository.ItemRepository;
+import coke.cokeshop.repository.ItemRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +25,9 @@ public class ItemServiceImpl implements ItemService{
 
     @Override
     @Transactional
-    public void update(Long id, String name, int price, int stockQuantity, String madeCompany, String releaseDate, Category category) {
+    public void update(Long id, String name, int price, int stockQuantity, String madeCompany, String releaseDate) {
         Item item = itemRepository.findById(id);
-        item.updateItem(item, name, price, stockQuantity, madeCompany, releaseDate, category);
+        item.updateItem(item, name, price, stockQuantity, madeCompany, releaseDate);
     }
 
     @Override
@@ -37,5 +38,11 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public Item findOne(Long id) {
         return itemRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void secessionItem(Item item) {
+        itemRepository.delete(item);
     }
 }

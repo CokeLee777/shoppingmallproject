@@ -1,6 +1,6 @@
 package coke.cokeshop.service;
 
 public interface OrderService {
-    Long Order(Long memberId, Long ItemId, int count);
+    Long order(Long memberId, Long itemId, int count);
     void cancelOrder(Long orderId);
 }

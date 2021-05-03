@@ -3,34 +3,40 @@
 <body>
 <div class="container">
     <form th:action="@{/item/new}" th:object="${itemCreateDto}" method="post">
-        <div class="form-group">
+        <div class="category">
             <label for="category">카테고리</label>
-            <select name="category_Id" id="category" class="form-control">
+            <select name="category_Id" id="category" class="category">
                 <option value="">카테고리선택</option>
                 <option th:each="category : ${categories}"
                         th:value="${category.id}"
                         th:text="${category.name}" />
             </select>
         </div>
-        <div class="form-group">
+        <div class="name">
             <label th:for="name">상품명</label>
-            <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요">
+            <input type="text" th:field="*{name}" class="name" placeholder="이름을 입력하세요"
+                   th:class="${#fields.hasErrors('name')}? 'name fieldError' : 'name'">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
         </div>
-        <div class="form-group">
+        <div class="price">
             <label th:for="price">가격</label>
-            <input type="number" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
+            <input type="number" th:field="*{price}" class="price" placeholder="가격을 입력하세요"
+                   th:class="${#fields.hasErrors('price')}? 'price fieldError' : 'price'">
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Incorrect price</p>
         </div>
-        <div class="form-group">
+        <div class="stockQuantity">
             <label th:for="stockQuantity">수량</label>
-            <input type="number" th:field="*{stockQuantity}" class="form-control" placeholder="수량을 입력하세요">
+            <input type="number" th:field="*{stockQuantity}" class="stockQuantity" placeholder="수량을 입력하세요"
+                   th:class="${#fields.hasErrors('stockQuantity')}? 'stockQuantity fieldError' : 'stockQuantity'">
+            <p th:if="${#fields.hasErrors('stockQuantity')}" th:errors="*{stockQuantity}">Incorrect stockQuantity</p>
         </div>
-        <div class="form-group">
-            <label th:for="author">만든회사</label>
-            <input type="text" th:field="*{createCompany}" class="form-control" placeholder="만든회사를 입력하세요">
+        <div class="madeCompany">
+            <label th:for="madeCompany">만든회사</label>
+            <input type="text" th:field="*{madeCompany}" class="madeCompany" placeholder="만든회사를 입력하세요">
         </div>
-        <div class="form-group">
-            <label th:for="isbn">출시일</label>
-            <input type="text" th:field="*{releaseDate}" class="form-control" placeholder="출시일을 입력하세요">
+        <div class="releaseDate">
+            <label th:for="releaseDate">출시일</label>
+            <input type="text" th:field="*{releaseDate}" class="releaseDate" placeholder="출시일을 입력하세요">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

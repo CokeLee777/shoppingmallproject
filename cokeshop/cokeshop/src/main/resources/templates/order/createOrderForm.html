@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hello Coke</title>
+</head>
+<body>
+<div class="container">
+    <form role="form" action="/order/new" method="post">
+        <div class="member">
+            <label for="member">주문회원</label>
+            <select name="memberId" id="member" class="item">
+                <option value="">회원선택</option>
+                <option th:each="member : ${members}"
+                        th:value="${member.id}"
+                        th:text="${member.username}" />
+            </select>
+        </div>
+        <div class="item">
+            <label for="item">상품명</label>
+            <select name="itemId" id="item" class="item">
+                <option value="">상품선택</option>
+                <option th:each="item : ${items}"
+                        th:value="${item.id}"
+                        th:text="${item.name}" />
+            </select>
+        </div>
+        <div class="count">
+            <label for="count">주문수량</label>
+            <input type="number" name="count" class="count" id="count"
+                   placeholder="주문 수량을 입력하세요">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <br/>
+</div> <!-- /container -->
+</body>
+</html>

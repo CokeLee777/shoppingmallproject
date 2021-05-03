@@ -40,17 +40,17 @@ public class MemberController {
      * 회원가입
      */
     @PostMapping("/member/new")
-    public String create(@Valid MemberCreateDto form, BindingResult result){
+    public String create(@Valid MemberCreateDto memberCreateDto, BindingResult result){
         //오류가 나면 오류메시지 출력
         if(result.hasErrors()){
             return "member/createMemberForm";
         }
 
-        Address address = Address.createAddress(form.getCity(), form.getStreet(), form.getZipcode());
+        Address address = Address.createAddress(memberCreateDto.getCity(), memberCreateDto.getStreet(), memberCreateDto.getZipcode());
         Member member = Member.createMember(
-                form.getUsername(),
-                form.getPassword(),
-                form.getEmail(),
+                memberCreateDto.getUsername(),
+                memberCreateDto.getPassword(),
+                memberCreateDto.getEmail(),
                 address);
 
         memberService.join(member);
@@ -104,7 +104,14 @@ public class MemberController {
     @PostMapping("/members/{id}/edit")
     public String update(
             @PathVariable("id") Long id,
-            @ModelAttribute("memberUpdateDto") MemberUpdateDto memberUpdateDto){
+            @Valid @ModelAttribute("memberUpdateDto") MemberUpdateDto memberUpdateDto,
+            BindingResult result){
+
+        //오류가 나면 오류메시지 출력
+        if(result.hasErrors()){
+            return "member/updateMemberForm";
+        }
+
         Address address = Address.createAddress(memberUpdateDto.getCity(), memberUpdateDto.getStreet(), memberUpdateDto.getZipcode());
         memberService.update(
                 id,
