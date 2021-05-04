@@ -1,12 +1,15 @@
 package coke.cokeshop.service;
 
 import coke.cokeshop.domain.*;
+import coke.cokeshop.dto.order.OrderSearchDto;
 import coke.cokeshop.repository.ItemRepository;
 import coke.cokeshop.repository.MemberRepository;
 import coke.cokeshop.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,5 +47,10 @@ public class OrderServiceImpl implements OrderService{
     public void cancelOrder(Long orderId) {
         Order order = orderRepository.findOneById(orderId);
         order.cancel();
+    }
+
+    @Override
+    public List<Order> findOrders(OrderSearchDto orderSearchDto) {
+        return orderRepository.findAllByString(orderSearchDto);
     }
 }

@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Hello Coke</title>
 </head>
 <body>
-<div class="topbar">
-    <div class="lefttop">
-        <h1>
-            <a href="/">Coke Shop</a>
-        </h1>
-    </div>
-    <div class="righttop">
-        <a href="/login">로그인</a>
-        <a href="/member/new">회원가입</a>
-        <a href="/members">회원정보</a>
-    </div>
-    <div class="righttop2">
-        <a href="/item/new">상품등록</a>
-        <a href="/items">상품목록</a>
-    </div>
-    <div class="righttop3">
-        <a href="/order/new">상품주문</a>
-        <a href="/orders">주문내역</a>
-    </div>
-</div>
-<div>
-    <div class="topbar2">
+<div class="position-static">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div th:replace="fragments/bodyHeader :: bodyHeader" />
 
+        <p class="badge bg-dark text-wrap" style="width: 4rem;">회원</p>
+        <p>
+            <a href="/member/new" class="btn btn-lg btn-info">회원가입</a>
+            <a href="/members" class="btn btn-lg btn-info">회원정보</a>
+        </p>
+        <p class="badge bg-dark text-wrap" style="width: 4rem;">상품</p>
+        <p>
+            <a href="/item/new" class="btn btn-lg btn-info">상품등록</a>
+            <a href="/items" class="btn btn-lg btn-info">상품목록</a>
+        </p>
+        <p class="badge bg-dark text-wrap" style="width: 4rem;">주문</p>
+        <p>
+            <a href="/order/new" class="btn btn-lg btn-info">상품주문</a>
+            <a href="/orders" class="btn btn-lg btn-info">주문내역</a>
+        </p>
     </div>
 </div>
 </body>
