@@ -89,11 +89,11 @@ mysql
 
 ## Contributiong
 
-Please read [CONTRIBUTING.md](https://gist.github.com/CokeLee777) for details on our code of conduct, and the process for submitting pull requests to us. / [CONTRIBUTING.md](https://gist.github.com/CokeLee777) 를 읽고 이에 맞추어 pull request 를 해주세요.
+Please read [CONTRIBUTING.md](https://github.com/CokeLee777/CokeLee777/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. / [CONTRIBUTING.md](https://github.com/CokeLee777/CokeLee777/blob/main/CONTRIBUTING.md) 를 읽고 이에 맞추어 pull request 를 해주세요.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://gist.github.com/CokeLee777/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/CokeLee777/CokeLee777/blob/main/LICENSE.md) file for details / 이 프로젝트는 MIT 라이센스로 라이센스가 부여되어 있습니다. 자세한 내용은 LICENSE.md 파일을 참고하세요.
 
 ### References 
 1. 자바 ORM 표준 JPA 프로그래밍
