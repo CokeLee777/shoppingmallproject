@@ -1,37 +1,37 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Hello Coke</title>
 </head>
 <body>
-<div class="container">
+<div class="position-absolute top-50 start-50 translate-middle">
     <form role="form" th:object="${itemUpdateDto}" method="post">
         <!-- id -->
         <input type="hidden" th:field="*{id}" />
-        <div class="name">
-            <label th:for="name">이름</label>
-            <input type="text" th:field="*{name}" class="name" placeholder="이름을 입력하세요"
-                   th:class="${#fields.hasErrors('name')}? 'name fieldError' : 'name'">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" th:for="name">이름</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요"
+                   th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect name</p>
         </div>
-        <div class="price">
-            <label th:for="price">가격</label>
-            <input type="number" th:field="*{price}" class="price" placeholder="가격을 입력하세요">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" th:for="price">가격</label>
+            <input type="number" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
         </div>
-        <div class="stockQuantity">
-            <label th:for="stockQuantity">수량</label>
-            <input type="number" th:field="*{stockQuantity}" class="stockQuantity" placeholder="수량을 입력하세요">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" th:for="stockQuantity">수량</label>
+            <input type="number" th:field="*{stockQuantity}" class="form-control" placeholder="수량을 입력하세요">
         </div>
-        <div class="madeCompany">
-            <label th:for="madeCompany">만든회사</label>
-            <input type="text" th:field="*{madeCompany}" class="madeCompany" placeholder="만든회사를 입력하세요">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" th:for="madeCompany">만든회사</label>
+            <input type="text" th:field="*{madeCompany}" class="form-control" placeholder="만든회사를 입력하세요">
         </div>
-        <div class="releaseDate">
-            <label th:for="releaseDate">출시일</label>
-            <input type="text" th:field="*{releaseDate}" class="releaseDate" placeholder="출시일을 입력하세요">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" th:for="releaseDate">출시일</label>
+            <input type="text" th:field="*{releaseDate}" class="form-control" placeholder="출시일을 입력하세요">
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br/>
 </div> <!-- /container -->

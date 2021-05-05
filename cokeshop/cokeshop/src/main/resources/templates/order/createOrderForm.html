@@ -1,36 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Hello Coke</title>
 </head>
 <body>
-<div class="container">
+<div class="position-absolute top-50 start-50 translate-middle">
     <form role="form" action="/order/new" method="post">
-        <div class="member">
-            <label for="member">주문회원</label>
-            <select name="memberId" id="member" class="item">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" for="member">주문회원</label>
+            <select name="memberId" id="member" class="form-select">
                 <option value="">회원선택</option>
                 <option th:each="member : ${members}"
                         th:value="${member.id}"
                         th:text="${member.username}" />
             </select>
         </div>
-        <div class="item">
-            <label for="item">상품명</label>
-            <select name="itemId" id="item" class="item">
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" for="item">상품명</label>
+            <select name="itemId" id="item" class="form-select">
                 <option value="">상품선택</option>
                 <option th:each="item : ${items}"
                         th:value="${item.id}"
                         th:text="${item.name}" />
             </select>
         </div>
-        <div class="count">
-            <label for="count">주문수량</label>
-            <input type="number" name="count" class="count" id="count"
+        <div class="input-group flex-nowrap">
+            <label class="input-group-text" for="count">주문수량</label>
+            <input type="number" name="count" class="form=control" id="count"
                    placeholder="주문 수량을 입력하세요">
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br/>
 </div> <!-- /container -->

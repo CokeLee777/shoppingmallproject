@@ -1,19 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Hello Coke</title>
 </head>
 <body>
-<div class="lefttop">
-    <h1>
-        <a href="/">Coke Shop</a>
-    </h1>
-</div>
 <div class="container">
-    <div>
-        <table>
-            <thead>
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+        <table class="table table-striped">
+            <thead class="table-light">
             <tr>
                 <th>#</th>
                 <th>이름</th>
@@ -32,10 +29,10 @@
                 <td th:text="${item.madeCompany}"></td>
                 <td th:text="${item.releaseDate}"></td>
                 <td>
-                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}" role="button">수정</a>
+                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}" class="btn btn-warning" role="button">수정</a>
                 </td>
                 <td>
-                    <a href="#" th:href="@{/items/{id}/delete (id=${item.id})}" role="button">삭제</a>
+                    <a href="#" th:href="@{/items/{id}/delete (id=${item.id})}" class="btn btn-danger" role="button">삭제</a>
                 </td>
             </tr>
             </tbody>

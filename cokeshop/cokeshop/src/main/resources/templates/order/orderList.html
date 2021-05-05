@@ -1,19 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/header :: header">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Hello Coke</title>
 </head>
 <body>
 <div class="container">
-  <div>
+  <div class="position-absolute top-50 start-50 translate-middle">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
     <div>
       <form th:object="${orderSearchDto}" class="form-inline">
-        <div class="form-group mb-2">
+        <div class="input-group flex-nowrap">
           <input type="text" th:field="*{memberName}" class="form-control" placeholder="회원명"/>
         </div>
-        <div class="orderStatus">
-          <select th:field="*{orderStatus}" class="form-control">
+        <div class="input-group flex-nowrap">
+          <select th:field="*{orderStatus}" class="form-select">
             <option value="">주문상태</option>
             <option th:each="status : ${T(coke.cokeshop.domain.OrderStatus).values()}"
                     th:value="${status}"
@@ -21,17 +23,17 @@
             </option>
           </select>
         </div>
-        <button type="submit">검색</button>
+        <button type="submit" class="btn btn-primary">검색</button>
       </form>
     </div>
     <table class="table table-striped">
-      <thead>
+      <thead class="table table-light">
       <tr>
         <th>#</th>
         <th>회원명</th>
-        <th>대표상품 이름</th>
-        <th>대표상품 주문가격</th>
-        <th>대표상품 주문수량</th>
+        <th>상품 이름</th>
+        <th>상품 주문가격</th>
+        <th>상품 주문수량</th>
         <th>상태</th>
         <th>일시</th>
         <th></th>
